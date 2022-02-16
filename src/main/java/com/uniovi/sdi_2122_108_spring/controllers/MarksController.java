@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class MarksController {
-    @Autowired //Inyectar el servicio
+    @Autowired //Inyectar el servicios
     private MarksService marksService;
 
     @RequestMapping(value = "/mark/add")
