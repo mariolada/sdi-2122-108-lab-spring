@@ -1,9 +1,18 @@
 package com.uniovi.sdi_2122_108_spring.entities;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
+@Entity
 public class Teacher {
+    @Id
+    @GeneratedValue
+    private Long id;
+    private String dni;
+    private String nombre;
+    private String apellidos;
+    private String categoria;
 
     public Teacher() {
 
@@ -59,11 +68,7 @@ public class Teacher {
                 ", categoria='" + categoria + '\'' +
                 '}';
     }
-    private Long id;
-    private String dni;
-    private String nombre;
-    private String apellidos;
-    private String categoria;
+
 
     public Long getId() {
         return id;
