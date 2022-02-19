@@ -1,15 +1,12 @@
 package com.uniovi.sdi_2122_108_spring.services;
 
-import com.uniovi.sdi_2122_108_spring.entities.Mark;
 import com.uniovi.sdi_2122_108_spring.entities.Teacher;
-import com.uniovi.sdi_2122_108_spring.repositories.MarksRepository;
-import com.uniovi.sdi_2122_108_spring.repositories.TeacherRepository;
+import com.uniovi.sdi_2122_108_spring.services.repositories.TeacherRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 @Service
 public class TeachersService {
