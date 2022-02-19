@@ -1,4 +1,4 @@
-package com.uniovi.sdi_2122_108_spring.services.repositories;
+package com.uniovi.sdi_2122_108_spring.repositories;
 
 import com.uniovi.sdi_2122_108_spring.entities.Mark;
 import com.uniovi.sdi_2122_108_spring.entities.Teacher;

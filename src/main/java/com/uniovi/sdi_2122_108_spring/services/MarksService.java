@@ -1,7 +1,7 @@
 package com.uniovi.sdi_2122_108_spring.services;
 
 import com.uniovi.sdi_2122_108_spring.entities.Mark;
-import com.uniovi.sdi_2122_108_spring.services.repositories.MarksRepository;
+import com.uniovi.sdi_2122_108_spring.repositories.MarksRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
