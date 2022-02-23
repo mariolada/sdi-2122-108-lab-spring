@@ -7,11 +7,9 @@ import org.springframework.stereotype.Component;
 import org.springframework.validation.*;
 @Component
 public class MarkFormValidator implements Validator {
-    @Autowired
-    private UsersService usersService;
     @Override
     public boolean supports(Class<?> aClass) {
-        return User.class.equals(aClass);
+        return Mark.class.equals(aClass);
     }
     @Override
     public void validate(Object target, Errors errors) {
@@ -20,8 +18,8 @@ public class MarkFormValidator implements Validator {
             errors.rejectValue("score", "Error.mark.score.value");
         }
         if (mark.getDescription().length() < 20) {
-            errors.rejectValue("score", "Error.mark.description.length");
+            errors.rejectValue("description", "Error.mark.description.length");
         }
     }
-    }
+}
 
