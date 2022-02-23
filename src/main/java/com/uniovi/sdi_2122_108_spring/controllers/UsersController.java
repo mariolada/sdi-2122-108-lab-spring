@@ -56,8 +56,12 @@ public class UsersController {
     }
     @RequestMapping(value = "/user/edit/{id}", method = RequestMethod.POST)
     public String setEdit(Model model, @PathVariable Long id, @ModelAttribute User user) {
-        usersService.addUser(user);
-        return "redirect:/user/details/" + id;
+        User originalUser= usersService.getUser(id);
+        originalUser.setDni(user.getDni());
+        originalUser.setName(user.getName());
+        originalUser.setLastName(user.getLastName());
+        usersService.addUser(originalUser);
+        return "redirect:/user/details/"+id;
     }
 
     @RequestMapping(value = "/signup", method = RequestMethod.POST)
@@ -66,7 +70,6 @@ public class UsersController {
         if(result.hasErrors()) {
             return "signup";
         }
-
         usersService.addUser(user);
         securityService.autoLogin(user.getDni(), user.getPasswordConfirm());
         return "redirect:home";
@@ -90,4 +93,15 @@ public class UsersController {
         model.addAttribute("markList", activeUser.getMarks());
         return "home";
     }
+
+    @RequestMapping("/user/list/update")
+    public String updateList(Model model){
+        model.addAttribute("usersList", usersService.getUsers() );
+        return "user/list :: tableUsers";
+    }
+
+
+
+
+
 }
