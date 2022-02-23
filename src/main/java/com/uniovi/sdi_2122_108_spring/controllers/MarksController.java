@@ -3,15 +3,21 @@ package com.uniovi.sdi_2122_108_spring.controllers;
 import com.uniovi.sdi_2122_108_spring.entities.Mark;
 import com.uniovi.sdi_2122_108_spring.services.MarksService;
 import com.uniovi.sdi_2122_108_spring.services.UsersService;
+import com.uniovi.sdi_2122_108_spring.validators.MarkFormValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class MarksController {
     @Autowired //Inyectar el servicios
     private MarksService marksService;
+
+    @Autowired
+    private MarkFormValidator markFormValidator;
 
     @Autowired
     private UsersService usersService;
@@ -28,7 +34,11 @@ public class MarksController {
         return "mark/list";
     }
     @RequestMapping(value = "/mark/add", method = RequestMethod.POST)
-    public String setMark(@ModelAttribute Mark mark) {
+    public String setMark(@Validated Mark mark, BindingResult result) {
+        markFormValidator.validate(mark, result);
+        if(result.hasErrors()) {
+            return "/mark/add";
+        }
         marksService.addMark(mark);
         return "redirect:/mark/list";
     }

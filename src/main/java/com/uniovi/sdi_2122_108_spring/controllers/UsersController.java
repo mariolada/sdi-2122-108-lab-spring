@@ -60,7 +60,8 @@ public class UsersController {
         originalUser.setDni(user.getDni());
         originalUser.setName(user.getName());
         originalUser.setLastName(user.getLastName());
-        usersService.addUser(originalUser);
+        originalUser.setPassword(originalUser.getPassword());
+        usersService.updateUser(originalUser);
         return "redirect:/user/details/"+id;
     }
 
