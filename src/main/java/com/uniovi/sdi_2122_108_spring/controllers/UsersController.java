@@ -1,5 +1,6 @@
 package com.uniovi.sdi_2122_108_spring.controllers;
 
+import com.uniovi.sdi_2122_108_spring.services.RolesService;
 import com.uniovi.sdi_2122_108_spring.services.SecurityService;
 import com.uniovi.sdi_2122_108_spring.validators.SignUpFormValidator;
 import org.springframework.beans.factory.annotation.*;
@@ -23,6 +24,9 @@ public class UsersController {
     @Autowired
     private SecurityService securityService;
 
+    @Autowired
+    private RolesService rolesService;
+
     @RequestMapping("/user/list")
     public String getListado(Model model) {
         model.addAttribute("usersList", usersService.getUsers());
@@ -30,6 +34,7 @@ public class UsersController {
     }
     @RequestMapping(value = "/user/add")
     public String getUser(Model model) {
+        model.addAttribute("rolesList", rolesService.getRoles());
         model.addAttribute("usersList", usersService.getUsers());
         return "user/add";
     }
@@ -71,6 +76,7 @@ public class UsersController {
         if(result.hasErrors()) {
             return "signup";
         }
+        user.setRole(rolesService.getRoles()[0]);
         usersService.addUser(user);
         securityService.autoLogin(user.getDni(), user.getPasswordConfirm());
         return "redirect:home";
