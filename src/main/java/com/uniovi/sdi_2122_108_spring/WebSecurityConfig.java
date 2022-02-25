@@ -10,6 +10,12 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.thymeleaf.extras.springsecurity4.dialect.SpringSecurityDialect;
+import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
+import org.springframework.web.method.support.HandlerMethodArgumentResolver;
+import org.springframework.data.domain.PageRequest;
+
+import java.util.List;
+
 
 @Configuration
 @EnableWebSecurity
@@ -31,6 +37,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public SpringSecurityDialect securityDialect() {
         return new SpringSecurityDialect();
     }
+
+
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
