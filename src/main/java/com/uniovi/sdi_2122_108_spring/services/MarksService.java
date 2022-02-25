@@ -1,6 +1,7 @@
 package com.uniovi.sdi_2122_108_spring.services;
 
 import com.uniovi.sdi_2122_108_spring.entities.Mark;
+import com.uniovi.sdi_2122_108_spring.entities.User;
 import com.uniovi.sdi_2122_108_spring.repositories.MarksRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -65,5 +66,14 @@ public class MarksService {
             marksRepository.updateResend(revised, id);
         }
     }
+    public List<Mark> getMarksForUser(User user) {
+        List<Mark> marks = new ArrayList<Mark>();
+        if (user.getRole().equals("ROLE_STUDENT")) {
+            marks = marksRepository.findAllByUser(user);}
+        if (user.getRole().equals("ROLE_PROFESSOR")) {
+            marks = getMarks(); }
+        return marks;
+    }
+
 
 }
