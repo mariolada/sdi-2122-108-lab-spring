@@ -1,0 +1,43 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extrasspringsecurity4">
+<head th:replace="fragments/head"/>
+<body>
+<!-- Barra de Navegación superior -->
+<nav th:replace="fragments/nav"/>
+<div class="container">
+    <h2>Profesores</h2>
+    <p>Los profesores que actualmente figuran en el sistema son los
+        siguientes:</p>
+    <div class="table-responsive">
+        <table class="table table-hover" th:fragment="tableTeachers" id="tableTeachers">
+            <thead>
+            <tr>
+                <th scope="col">DNI</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Apellidos</th>
+                <th scope="col">Categoria</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="teacher : ${teacherList}">
+                <td scope="row" th:text="${teacher.dni}">71888888X</td>
+                <td scope="row" th:text="${teacher.nombre}">Nombre del profesor</td>
+                <td scope="row" th:text="${teacher.apellidos}">Apellidos del profesor</td>
+                <td scope="row" th:text="${teacher.categoria}">Categoria del profesor</td>
+                <td scope="row"><a sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_PROFESSOR')" th:href="${'/professor/details/' + teacher.id}">detalles</a></td>
+                <td scope="row"><a sec:authorize="hasRole('ROLE_ADMIN')" th:href="${'/professor/edit/' + teacher.id}">modificar</a></td>
+                <td scope="row" ><a sec:authorize="hasRole('ROLE_ADMIN')" th:href="${'/professor/delete/' + teacher.id}">eliminar</a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<footer th:replace="fragments/footer"/>
+</body>
+</html>
