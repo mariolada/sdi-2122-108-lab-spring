@@ -4,6 +4,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import java.util.List;
+
 public class PO_LoginView extends PO_NavView{
 
     static public void fillLoginForm(WebDriver driver, String dnip, String  passwordp) {
@@ -19,4 +21,5 @@ public class PO_LoginView extends PO_NavView{
         By boton = By.className("btn");
         driver.findElement(boton).click();
     }
+
 }

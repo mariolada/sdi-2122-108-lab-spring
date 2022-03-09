@@ -5,6 +5,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import org.openqa.selenium.support.ui.Select;
+
+import java.util.List;
+
 public class PO_PrivateView extends PO_NavView {
     static public void fillFormAddMark(WebDriver driver, int userOrder, String descriptionp, String scorep)
     {
@@ -22,5 +25,24 @@ public class PO_PrivateView extends PO_NavView {
         score.sendKeys(scorep);
         By boton = By.className("btn");
         driver.findElement(boton).click();
+    }
+
+    static public void login(WebDriver driver, String dnip, String passwordp, String checkText) {
+        //Vamos al formulario de logueo.
+        PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
+        //Rellenamos el formulario
+        PO_LoginView.fillLoginForm(driver, dnip, passwordp);
+        PO_View.checkElementBy(driver, "text", checkText);
+    }
+
+    static public void disconnect(WebDriver driver, String message) {
+        //Ahora nos desconectamos y comprobamos que aparece el menú de registro
+        String loginText = PO_HomeView.getP().getString(message, PO_Properties.getSPANISH());
+        PO_PrivateView.clickOption(driver, "logout", "text", loginText);
+    }
+
+    static public void clickAndCheck(WebDriver driver, String type, String text, int element) {
+        List<WebElement> elements = PO_View.checkElementBy(driver, type, text);
+        elements.get(element).click();
     }
 }
